@@ -26,11 +26,11 @@ def home_page():
 def show_users():
     # instance of user 
     users = User.query.all()
-    return render_template('users.html', users=users)
+    return render_template('users/users.html', users=users)
 
 @app.route('/users/new')
 def new_user_form():
-    return render_template('new.html')
+    return render_template('users/new.html')
 
 @app.route('/users/new', methods=["POST"])
 def new_user():
@@ -53,14 +53,14 @@ def show_user(user_id):
     """Show info about current user"""
     # throw 404 error if ID not found 
     user = User.query.get_or_404(user_id)
-    return render_template('details.html', user=user)
+    return render_template('users/details.html', user=user)
 
 @app.route('/users/<int:user_id>/edit')
 def edit_user(user_id):
     """Show form to edit user details"""
     # throw 404 error if ID not found 
     user = User.query.get_or_404(user_id)
-    return render_template('edit.html', user=user)
+    return render_template('users/edit.html', user=user)
 
 @app.route('/users/<int:user_id>/edit', methods=["POST"])
 def confirm_edit_user(user_id):
@@ -81,3 +81,10 @@ def delete_user(user_id):
     db.session.commit()
 
     return redirect('/users')
+
+# POST Routes 
+
+@app.route('/users/<int:user_id>/posts/new') 
+def show_posts(user_id):
+    user = User.query.get_or_404(user_id) 
+    return render_template('posts/new.html', user=user)
