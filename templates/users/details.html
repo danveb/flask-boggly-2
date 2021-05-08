@@ -17,12 +17,12 @@
 <h2>Posts</h2>
 <ul>
     {% for post in user.posts %}
-    <li>{{post.title}}</li>
+    <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
     {% endfor %}
 </ul>
 
-<form action="">
-    <button>Add Post</button>
+<form>
+    <button formaction="/users/{{user.id}}/posts/new" formmethod="GET">Add Post</button>
 </form>
 
 {% endblock %}

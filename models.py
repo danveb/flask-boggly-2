@@ -20,6 +20,10 @@ class User(db.Model):
     last_name = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.Text, nullable=False, default=DEFAULT_IMG_URL)
 
+    # need relationship between post and user 
+    # ON DELETE CASCADE 
+    posts = db.relationship('Post', backref='user', cascade="all, delete-orphan")
+
 class Post(db.Model):
     """Post Model"""
     __tablename__ = 'posts' 
