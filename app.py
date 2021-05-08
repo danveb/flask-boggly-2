@@ -124,3 +124,12 @@ def handle_post_form(post_id):
     db.session.commit() 
 
     return redirect (f'/users/{post.user_id}')
+
+@app.route('/posts/<int:post_id>/delete', methods=["POST"]) 
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect (f'/users/{post.user_id}')
